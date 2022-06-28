@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
@@ -20,6 +22,12 @@ class _HomePageState extends State<HomePage> {
   initState() {
     super.initState();
     // FireStoreHelper.fireStoreHelper.initDb();
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        date = "${dt.day}/${dt.month}/${dt.year}";
+        time = "${dt.hour}:${dt.minute}:${dt.second}";
+      });
+    });
   }
 
   @override
@@ -90,8 +98,6 @@ class _HomePageState extends State<HomePage> {
                       if (thoughkey.currentState!.validate()) {
                         thoughkey.currentState!.save();
 
-                        date = "${dt.day}/${dt.month}/${dt.year}";
-                        time = "${dt.hour}:${dt.minute}:${dt.second}";
                         print(date);
                         print(time);
 
